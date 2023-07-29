@@ -6,16 +6,15 @@
 </template>
 
 <script setup lang="ts">
-import { reqLogin } from "@/api/user"
-import { onMounted } from 'vue';
+import { reqLogin } from '@/api/user'
+import { onMounted } from 'vue'
 
 let f = async () => {
   let res = await reqLogin({
     username: 'admin',
-    password: '111111'
+    password: '111111',
   })
-  console.log(res);
-
+  console.log(res)
 }
 onMounted(() => {
   f()
