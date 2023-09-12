@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { reqLogin } from '@/api/user'
 // 引入数据类型
 import { loginFormData, loginResponseData } from '@/api/user/type'
-import { UserState } from './types/types'
+import { UserState } from './types/type'
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
 let useUserSotre = defineStore('User', {
   // 小仓库存储数据
