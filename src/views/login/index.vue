@@ -3,17 +3,36 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginFormRef">
+        <el-form
+          class="login-form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginFormRef"
+        >
           <h1>hello</h1>
           <h2>欢迎来到✨✨✨</h2>
           <el-form-item size="normal" prop="username">
-            <el-input prefix-icon="User" v-model="loginForm.username"></el-input>
+            <el-input
+              prefix-icon="User"
+              v-model="loginForm.username"
+            ></el-input>
           </el-form-item>
           <el-form-item size="normal" prop="password">
-            <el-input type="password" prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
+            <el-input
+              type="password"
+              prefix-icon="Lock"
+              v-model="loginForm.password"
+              show-password
+            ></el-input>
           </el-form-item>
           <el-form-item size="normal">
-            <el-button :loading="loading" class="login-btn" type="primary" size="default" @click="login">
+            <el-button
+              :loading="loading"
+              class="login-btn"
+              type="primary"
+              size="default"
+              @click="login"
+            >
               登录
             </el-button>
           </el-form-item>
