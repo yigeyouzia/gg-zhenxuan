@@ -72,11 +72,11 @@ const login = async () => {
 .login-container {
   width: 100%;
   height: 100vh;
+  background: url('@/assets/images/background.jpg') center/80% no-repeat;
   background:
     linear-gradient(to bottom, rgba(110, 116, 130, 0.5), rgba(89, 86, 87, 0.5)),
     url('@/assets/images/background1.jpg') center/80% no-repeat;
   // background: content-box radial-gradient(rgb(143, 74, 88), rgb(89, 135, 152));
-  background: url('@/assets/images/background.jpg') center/80% no-repeat;
   background-size: cover;
 
   .login-form {
