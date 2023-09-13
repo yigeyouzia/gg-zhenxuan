@@ -7,16 +7,14 @@
     </router-view>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <script lang="ts">
 export default {
-    name: "Main"
+    name: 'Main',
 }
 </script>
 
-<style style scoped lang = "scss" >
+<style style scoped lang="scss">
 .fade-enter-from {
     /* 透明度 */
     opacity: 0;
@@ -24,7 +22,7 @@ export default {
 }
 
 .fade-enter-active {
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .fade-enter-to {
