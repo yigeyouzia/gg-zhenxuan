@@ -1,23 +1,23 @@
 <template>
-  <div class="layout_container">
-    <!-- 左侧菜单 -->
-    <div class="layout_slider">
-      <Logo></Logo>
-      <!-- 菜单滚动条 -->
-      <el-scrollbar height="400px" class="scrollbar">
-        <!-- 菜单组件  #001529-->
-        <el-menu background-color="#001529" text-color="white">
-          <Menu :menuList="userStore.menuRoutes"></Menu>
-        </el-menu>
-      </el-scrollbar>
+    <div class="layout_container">
+        <!-- 左侧菜单 -->
+        <div class="layout_slider">
+            <Logo></Logo>
+            <!-- 菜单滚动条 -->
+            <el-scrollbar height="400px" class="scrollbar">
+                <!-- 菜单组件  #001529-->
+                <el-menu background-color="#001529" text-color="white">
+                    <Menu :menuList="userStore.menuRoutes"></Menu>
+                </el-menu>
+            </el-scrollbar>
+        </div>
+        <!-- 顶部导航 -->
+        <div class="layout_tabbar">顶部导航</div>
+        <!-- 内容展示区 -->
+        <div class="layout_main">
+            <Main></Main>
+        </div>
     </div>
-    <!-- 顶部导航 -->
-    <div class="layout_tabbar">顶部导航</div>
-    <!-- 内容展示区 -->
-    <div class="layout_main">
-      <Main></Main>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -34,47 +34,47 @@ let userStore = useUserSotre()
 
 <style scoped lang="scss">
 .layout_container {
-  width: 100%;
-  height: 100vh;
-  background-color: red;
-
-  // 左侧导航栏
-  .layout_slider {
-    width: $base-menu-width;
+    width: 100%;
     height: 100vh;
-    background-color: $base-menu-background;
-    // background-color: rgb(200, 98, 115);
+    background-color: red;
 
-    .scrollbar {
-      width: 100%;
-      height: calc(100vh - $base-menu-logo-height);
+    // 左侧导航栏
+    .layout_slider {
+        width: $base-menu-width;
+        height: 100vh;
+        background-color: $base-menu-background;
+        // background-color: rgb(200, 98, 115);
 
-      .el-menu {
-        border-right: none;
-      }
+        .scrollbar {
+            width: 100%;
+            height: calc(100vh - $base-menu-logo-height);
+
+            .el-menu {
+                border-right: none;
+            }
+        }
     }
-  }
 
-  // 顶部
-  .layout_tabbar {
-    position: fixed;
-    width: calc(100% - $base-menu-width);
-    height: $base-tabbar-height;
-    background-color: cyan;
-    top: 0;
-    left: $base-menu-width;
-  }
+    // 顶部
+    .layout_tabbar {
+        position: fixed;
+        width: calc(100% - $base-menu-width);
+        height: $base-tabbar-height;
+        background-color: cyan;
+        top: 0;
+        left: $base-menu-width;
+    }
 
-  // 内容展示区
-  .layout_main {
-    position: absolute;
-    width: calc(100% - $base-menu-width);
-    height: calc(100vh - $base-tabbar-height);
-    background-color: forestgreen;
-    left: $base-menu-width;
-    top: $base-tabbar-height;
-    padding: 20px;
-    overflow: auto;
-  }
+    // 内容展示区
+    .layout_main {
+        position: absolute;
+        width: calc(100% - $base-menu-width);
+        height: calc(100vh - $base-tabbar-height);
+        background-color: forestgreen;
+        left: $base-menu-width;
+        top: $base-tabbar-height;
+        padding: 20px;
+        overflow: auto;
+    }
 }
 </style>
