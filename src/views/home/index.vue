@@ -1,5 +1,5 @@
 <template>
-  <div>我是一级路由home</div>
+  <div>我是二级路由home</div>
 </template>
 
 <script setup lang="ts"></script>
