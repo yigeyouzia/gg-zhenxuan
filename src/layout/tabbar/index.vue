@@ -15,7 +15,7 @@
 // 左侧
 import Breadcrumb from "./breadcrumb/index.vue"
 // 右侧
-import Setting from "./breadcrumb/index.vue"
+import Setting from "./setting/index.vue"
 
 
 </script>
