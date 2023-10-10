@@ -8,6 +8,7 @@ import { UserState } from './types/type'
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
 // 引入路由（常量路由）
 import { constantRoute } from '@/router/routes'
+
 let useUserSotre = defineStore('User', {
   // 小仓库存储数据
   state: (): UserState => {
@@ -17,6 +18,7 @@ let useUserSotre = defineStore('User', {
     }
   },
   // 异步|逻辑的地方
+  getters: {},
   actions: {
     // 用户登录的方法
     async userLogin(data: loginFormData): Promise<any> {
@@ -35,7 +37,6 @@ let useUserSotre = defineStore('User', {
       }
     },
   },
-  getters: {},
 })
 
 // 对外暴露小仓库

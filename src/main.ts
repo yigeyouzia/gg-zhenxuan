@@ -26,7 +26,6 @@ app.use(globalComponent)
 app.use(ElementPlus, {
   locale: zhCn,
 })
-
 //6.引入全局样式
 import '@/styles/index.scss'
 

@@ -1,6 +1,6 @@
 // 对外暴露配置路由(常量路由)
 export const constantRoute = [
-  // 登录
+  // 1.登录
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -22,6 +22,7 @@ export const constantRoute = [
       icon: 'Avatar', // 菜单左侧图标
     },
     redirect: '/home',
+    // 2.home
     children: [
       {
         path: '/home',
@@ -34,7 +35,7 @@ export const constantRoute = [
       },
     ],
   },
-  // screen
+  // 1.screen
   {
     path: '/screen',
     component: () => import('@/views/screen/index.vue'),
@@ -45,7 +46,7 @@ export const constantRoute = [
       icon: 'Platform', // 菜单左侧图标
     },
   },
-  // 权限管理
+  // 1.权限管理
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),

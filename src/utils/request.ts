@@ -9,6 +9,7 @@ const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API, //基础路径上会携带/api
   timeout: 5000, //超时的时间的设置
 })
+
 //第二步:request实例添加请求与响应拦截器
 request.interceptors.request.use((config) => {
   //获取用户相关的小仓库:获取仓库内部token,登录成功以后携带给服务器
