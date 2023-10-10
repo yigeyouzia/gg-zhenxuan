@@ -5,14 +5,17 @@
             <Logo></Logo>
             <!-- 菜单滚动条 -->
             <el-scrollbar height="400px" class="scrollbar">
-                <!-- 菜单组件  #001529-->
-                <el-menu background-color="#001529" text-color="white">
+                <!-- 菜单组件  #001529  collapse-->
+                <el-menu :default-active="$route.path" background-color="#001529" text-color="white"
+                    active-text-color="#2d78be">
                     <Menu :menuList="userStore.menuRoutes"></Menu>
                 </el-menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
-        <div class="layout_tabbar">顶部导航</div>
+        <div class="layout_tabbar">
+            <Tabbar></Tabbar>
+        </div>
         <!-- 内容展示区 -->
         <div class="layout_main">
             <Main></Main>
@@ -21,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+// 获取路由
+import { useRoute } from 'vue-router'
 // logo组件
 import Logo from './logo/index.vue'
 // munu组件
@@ -29,17 +34,24 @@ import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 // 获取用户相关小仓库
 import useUserSotre from '@/store/modules/user'
+// 引入顶部tab组件
+import Tabbar from "./tabbar/index.vue"
+
 let userStore = useUserSotre()
+// 获取路由对象
+let $route = useRoute()
+
 </script>
 
 <style scoped lang="scss">
 .layout_container {
     width: 100%;
     height: 100vh;
-    background-color: red;
+    // color: #2d78be;
 
     // 左侧导航栏
     .layout_slider {
+        color: white;
         width: $base-menu-width;
         height: 100vh;
         background-color: $base-menu-background;
@@ -60,7 +72,7 @@ let userStore = useUserSotre()
         position: fixed;
         width: calc(100% - $base-menu-width);
         height: $base-tabbar-height;
-        background-color: cyan;
+        // background-color: cyan;
         top: 0;
         left: $base-menu-width;
     }

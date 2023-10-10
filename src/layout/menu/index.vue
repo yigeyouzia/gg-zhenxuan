@@ -3,6 +3,7 @@
     <!--没有子路由-->
     <template v-if="!item.children">
       <el-menu-item :index="item.path" v-if="!item.meta.hidden" @click="goRoute">
+        <!-- 图标放在插槽外面 防止伸缩时消失 -->
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
