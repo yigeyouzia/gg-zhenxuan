@@ -1,7 +1,7 @@
 <!-- 顶部导航栏右侧内容 -->
 <template>
     <!-- 1刷新按钮 -->
-    <el-button size="small" icon="Refresh" circle></el-button>
+    <el-button size="small" icon="Refresh" circle @click="updateRefsh"></el-button>
     <!-- 2全屏按钮 -->
     <el-button size="small" icon="FullScreen" circle></el-button>
     <!-- 3设置按钮 -->
@@ -26,7 +26,14 @@
 </template>
 
 <script setup lang="ts">
+// 获取骨架的小仓库
+import useLayOutSettingStore from '@/store/modules/setting';
+let LayOutSettingStore = useLayOutSettingStore()
 
+// 刷新按钮回调
+const updateRefsh = () => {
+    LayOutSettingStore.refsh = !LayOutSettingStore.refsh
+}
 </script>
 
 <script lang="ts">
