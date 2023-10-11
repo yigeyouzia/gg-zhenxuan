@@ -3,7 +3,7 @@
     <!-- 1刷新按钮 -->
     <el-button size="small" icon="Refresh" circle @click="updateRefsh"></el-button>
     <!-- 2全屏按钮 -->
-    <el-button size="small" icon="FullScreen" circle></el-button>
+    <el-button size="small" icon="FullScreen" circle @click="fullScreen"></el-button>
     <!-- 3设置按钮 -->
     <el-button size="small" icon="Setting" circle></el-button>
     <!-- 4头像 -->
@@ -33,6 +33,20 @@ let LayOutSettingStore = useLayOutSettingStore()
 // 刷新按钮回调
 const updateRefsh = () => {
     LayOutSettingStore.refsh = !LayOutSettingStore.refsh
+}
+
+// 全屏按钮
+const fullScreen = () => {
+    //DoM对象的一个属性：可以用来判断当前是不是全屏模式[全屏：true,不是全屏：false]
+    let full = document.fullscreenElement;
+    //切换为全屏模式
+    if (!full) {
+        //文档根节点的方法requestFullscreen,实现全屏模式
+        document.documentElement.requestFullscreen();
+    } else {
+        // 变为不是全屏模式->退出全屏模式
+        document.exitFullscreen();
+    }
 }
 </script>
 
