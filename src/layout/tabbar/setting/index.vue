@@ -1,3 +1,4 @@
+<!-- 顶部导航栏右侧内容 -->
 <template>
     <!-- 1刷新按钮 -->
     <el-button size="small" icon="Refresh" circle></el-button>
@@ -26,6 +27,12 @@
 
 <script setup lang="ts">
 
+</script>
+
+<script lang="ts">
+export default {
+    name: "Setting"
+}
 </script>
 
 <style lang="scss"></style>

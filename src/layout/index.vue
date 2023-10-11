@@ -1,23 +1,23 @@
 <template>
     <div class="layout_container">
-        <!-- 左侧菜单 -->
-        <div class="layout_slider">
+        <!-- 左侧菜单  动态类名-->
+        <div class="layout_slider" :class="{ fold: LayOutSettingStore.fold ? true : false }">
             <Logo></Logo>
             <!-- 菜单滚动条 -->
             <el-scrollbar height="400px" class="scrollbar">
                 <!-- 菜单组件  #001529  collapse-->
                 <el-menu :default-active="$route.path" background-color="#001529" text-color="white"
-                    active-text-color="#2d78be">
+                    active-text-color="#2d78be" :collapse="LayOutSettingStore.fold ? true : false">
                     <Menu :menuList="userStore.menuRoutes"></Menu>
                 </el-menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
-        <div class="layout_tabbar">
+        <div class="layout_tabbar" :class="{ fold: LayOutSettingStore.fold ? true : false }">
             <Tabbar></Tabbar>
         </div>
         <!-- 内容展示区 -->
-        <div class="layout_main">
+        <div class="layout_main" :class="{ fold: LayOutSettingStore.fold ? true : false }">
             <Main></Main>
         </div>
     </div>
@@ -34,13 +34,24 @@ import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 // 获取用户相关小仓库
 import useUserSotre from '@/store/modules/user'
+import useLayOutSettingStore from "@/store/modules/setting";
 // 引入顶部tab组件
 import Tabbar from "./tabbar/index.vue"
 
+
+// 获取小仓库
 let userStore = useUserSotre()
+let LayOutSettingStore = useLayOutSettingStore()
+
 // 获取路由对象
 let $route = useRoute()
 
+</script>
+
+<script lang="ts">
+export default {
+    name: "Layout"
+}
 </script>
 
 <style scoped lang="scss">
@@ -55,6 +66,7 @@ let $route = useRoute()
         width: $base-menu-width;
         height: 100vh;
         background-color: $base-menu-background;
+        transition: all 0.3s;
         // background-color: rgb(200, 98, 115);
 
         .scrollbar {
@@ -64,6 +76,11 @@ let $route = useRoute()
             .el-menu {
                 border-right: none;
             }
+        }
+
+        // 折叠动画 父类选择器
+        &.fold {
+            width: $base-menu-min-width;
         }
     }
 
@@ -75,6 +92,12 @@ let $route = useRoute()
         // background-color: cyan;
         top: 0;
         left: $base-menu-width;
+        transition: all 0.3s;
+
+        &.fold {
+            width: calc(100vw - $base-menu-min-width);
+            left: $base-menu-min-width;
+        }
     }
 
     // 内容展示区
@@ -87,6 +110,13 @@ let $route = useRoute()
         top: $base-tabbar-height;
         padding: 20px;
         overflow: auto;
+        transition: all 0.3s;
+
+
+        &.fold {
+            width: calc(100vw - $base-menu-min-width);
+            left: $base-menu-min-width;
+        }
     }
 }
 </style>
