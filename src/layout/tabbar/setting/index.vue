@@ -19,7 +19,7 @@
         <!-- 具名插槽 -->
         <template #dropdown>
             <el-dropdown-menu>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
         </template>
     </el-dropdown>
@@ -30,9 +30,16 @@
 import useUserStore from "@/store/modules/user"
 import useLayOutSettingStore from '@/store/modules/setting';
 
+import { useRouter, useRoute } from "vue-router";
+
 // 使用仓库
 let LayOutSettingStore = useLayOutSettingStore()
 let userSotre = useUserStore()
+
+// 路由器对象
+let $router = useRouter()
+// 路由对象
+let $route = useRoute()
 
 
 // 刷新按钮回调
@@ -52,6 +59,16 @@ const fullScreen = () => {
         // 变为不是全屏模式->退出全屏模式
         document.exitFullscreen();
     }
+}
+
+// 退出登录
+const logout = () => {
+    // 1.退出登录请求接口
+    // 2.清除pina仓库相关数据
+    userSotre.userLogout()
+    // 3.跳转页面
+    $router.push({ path: "/login", query: { redirect: $route.path } })
+
 }
 </script>
 

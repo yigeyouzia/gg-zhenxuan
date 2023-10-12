@@ -9,7 +9,7 @@ import {
   userInfoReponseData,
 } from '@/api/user/type'
 import { UserState } from './types/type'
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN, DEl_TOKEN } from '@/utils/token'
 // 引入路由（常量路由）
 import { constantRoute } from '@/router/routes'
 
@@ -50,6 +50,15 @@ let useUserSotre = defineStore('User', {
         this.username = res.data.checkUser.username
         this.avatar = res.data.checkUser.avatar
       }
+    },
+    // 退出logout
+    userLogout() {
+      // 目前没有mock接口
+      // 只清除pina仓库
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      DEl_TOKEN()
     },
   },
 })

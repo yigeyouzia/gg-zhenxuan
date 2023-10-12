@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getMsgByTime } from '@/utils/time.ts'
 
@@ -36,6 +36,7 @@ import { rules } from './rules'
 let userStore = useUserStore()
 // 获取路由器
 let $router = useRouter()
+let $route = useRoute()
 
 // 加载变量
 let loading = ref(false)
@@ -44,14 +45,16 @@ let loginForm = reactive({ username: 'admin1', password: '111111' })
 let loginFormRef = ref()
 // 登录按钮回调
 const login = async () => {
+  // console.log($route);
   // 表单校验字段
   await loginFormRef.value.validate()
   // 加载效果
   loading.value = true
   try {
     await userStore.userLogin(loginForm)
-    // 跳转到首页
-    $router.push('/')
+    // 跳转到首页 或者重定向位置
+    let redirect: any | string = $route.query.redirect
+    $router.push({ path: redirect || '/' })
     ElNotification({
       type: 'success',
       message: '欢迎回来',
