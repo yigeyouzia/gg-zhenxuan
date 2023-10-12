@@ -7,11 +7,11 @@
     <!-- 3设置按钮 -->
     <el-button size="small" icon="Setting" circle></el-button>
     <!-- 4头像 -->
-    <img src="../../../assets/images/avatar.jpg" alt="avatar" style="width: 24px; height: 24px; margin: 0px 10px">
+    <img :src="userSotre.avatar" alt="avatar" style="width: 24px; height: 24px; margin: 0px 10px; border-radius: 50%;">
     <!-- 5下拉菜单 -->
     <el-dropdown>
         <span class="el-dropdown-link">
-            admin
+            {{ userSotre.username }}
             <el-icon class="el-icon--right">
                 <arrow-down />
             </el-icon>
@@ -27,8 +27,13 @@
 
 <script setup lang="ts">
 // 获取骨架的小仓库
+import useUserStore from "@/store/modules/user"
 import useLayOutSettingStore from '@/store/modules/setting';
+
+// 使用仓库
 let LayOutSettingStore = useLayOutSettingStore()
+let userSotre = useUserStore()
+
 
 // 刷新按钮回调
 const updateRefsh = () => {
