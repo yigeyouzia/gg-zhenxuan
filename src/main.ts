@@ -35,5 +35,5 @@ app.use(router)
 app.use(pinia)
 
 app.config.globalProperties.Verify = Verify
-
+import './permission'
 app.mount('#app')
