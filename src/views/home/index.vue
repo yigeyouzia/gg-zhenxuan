@@ -4,14 +4,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 import useUserStore from '@/store/modules/user'
 
 let userSotre = useUserStore();
 
-onMounted(() => {
-  userSotre.userInfo()
-})
+// onMounted(() => {
+//   userSotre.userInfo()
+// })
 </script>
 
 <style scoped lang="scss"></style>

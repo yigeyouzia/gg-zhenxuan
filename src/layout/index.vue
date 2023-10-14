@@ -1,10 +1,10 @@
 <template>
     <div class="layout_container">
         <!-- 左侧菜单  动态类名-->
-        <div class="layout_slider" :class="{ fold: LayOutSettingStore.fold ? true : false }">
+        <div class="layout_slider">
             <Logo></Logo>
             <!-- 菜单滚动条 -->
-            <el-scrollbar height="400px" class="scrollbar">
+            <el-scrollbar height=" 400px" class="scrollbar">
                 <!-- 菜单组件  #001529  collapse-->
                 <el-menu :default-active="$route.path" background-color="#001529" text-color="white"
                     active-text-color="#2d78be" :collapse="LayOutSettingStore.fold ? true : false">
