@@ -3,12 +3,12 @@ import { defineStore } from 'pinia'
 // 引入接口
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 // 引入数据类型
-import {
+import type {
   loginFormData,
   loginResponseData,
   userInfoReponseData,
 } from '@/api/user/type'
-import { UserState } from './types/type'
+import type { UserState } from './types/type'
 import { SET_TOKEN, GET_TOKEN, DEl_TOKEN } from '@/utils/token'
 // 引入路由（常量路由）
 import { constantRoute } from '@/router/routes'
@@ -29,7 +29,6 @@ let useUserSotre = defineStore('User', {
     // 用户登录的方法
     async userLogin(data: loginFormData): Promise<any> {
       let res: loginResponseData = await reqLogin(data)
-      console.log(res)
       // 成功：200：token
       if (res.code === 200) {
         this.token = res.data as string
