@@ -40,7 +40,7 @@ let $route = useRoute()
 
 // 加载变量
 let loading = ref(false)
-let loginForm = reactive({ username: 'admin1', password: '111111' })
+let loginForm = reactive({ username: 'admin', password: 'atguigu123' })
 // 获取form Ref
 let loginFormRef = ref()
 // 登录按钮回调

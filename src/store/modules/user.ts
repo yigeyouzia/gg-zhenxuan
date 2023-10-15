@@ -1,7 +1,7 @@
 // 创建用户小仓库
 import { defineStore } from 'pinia'
 // 引入接口
-import { reqLogin, reqUserInfo } from '@/api/user'
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 // 引入数据类型
 import {
   loginFormData,
@@ -32,36 +32,46 @@ let useUserSotre = defineStore('User', {
       console.log(res)
       // 成功：200：token
       if (res.code === 200) {
-        this.token = res.data.token as string
+        this.token = res.data as string
         // 本地存储
-        SET_TOKEN(res.data.token as string)
+        SET_TOKEN(res.data as string)
         // 保证当前async函数返回成功的promise
         return 'ok'
       } else {
         // 失败：201
-        return Promise.reject(new Error(res.data.message))
+        return res.data === null
+          ? Promise.reject(new Error('没有此用户'))
+          : Promise.reject(new Error(res.data))
       }
     },
+
     // 获取用户信息
     async userInfo() {
       // 获取用户信息存储到仓库（用户头像，名字）
       let res: userInfoReponseData = await reqUserInfo()
       if (res.code === 200) {
-        this.username = res.data.checkUser.username
-        this.avatar = res.data.checkUser.avatar
+        this.username = res.data.name
+        this.avatar = res.data.avatar
         return 'ok'
       } else {
-        return Promise.reject('获取用户信息失败')
+        return Promise.reject(res.message)
       }
     },
+
     // 退出logout
-    userLogout() {
+    async userLogout() {
       // 目前没有mock接口
-      // 只清除pina仓库
-      this.token = ''
-      this.username = ''
-      this.avatar = ''
-      DEl_TOKEN()
+      let res = await reqLogout()
+      if (res.code == 200) {
+        //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        DEl_TOKEN()
+        return 'ok'
+      } else {
+        return Promise.reject(new Error(res.message))
+      }
     },
   },
 })

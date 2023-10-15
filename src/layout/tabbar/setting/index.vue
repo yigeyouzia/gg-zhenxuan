@@ -62,10 +62,10 @@ const fullScreen = () => {
 }
 
 // 退出登录
-const logout = () => {
+const logout = async () => {
     // 1.退出登录请求接口
     // 2.清除pina仓库相关数据
-    userSotre.userLogout()
+    await userSotre.userLogout()
     // 3.跳转页面
     $router.push({ path: "/login", query: { redirect: $route.path } })
 
