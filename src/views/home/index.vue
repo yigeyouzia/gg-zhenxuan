@@ -7,7 +7,7 @@
 // import { onMounted } from 'vue';
 import useUserStore from '@/store/modules/user'
 
-let userSotre = useUserStore();
+let userSotre = useUserStore()
 
 // onMounted(() => {
 //   userSotre.userInfo()

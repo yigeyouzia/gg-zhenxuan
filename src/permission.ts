@@ -2,7 +2,7 @@
 import router from '@/router'
 import setting from './setting'
 // pnpm i progress 进度条
-// 渐变色：background-image: linear-gradient(to right, red, cyan, yellow, pink);
+// @ts-expect-error 渐变色：background-image: linear-gradient(to right, red, cyan, yellow, pink);
 import nprogress from 'nprogress'
 // 取消加载小球
 nprogress.configure({ showSpinner: false })
@@ -16,7 +16,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   document.title = `${setting.title} - ${to.meta.title}`
   nprogress.start()
   // 获取token  判断登录
-  let userStore = useUserStore()
+  const userStore = useUserStore()
   const token = userStore.token
   // 获取用户名字
   const username = userStore.username

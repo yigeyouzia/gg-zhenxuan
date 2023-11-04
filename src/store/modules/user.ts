@@ -13,7 +13,7 @@ import { SET_TOKEN, GET_TOKEN, DEl_TOKEN } from '@/utils/token'
 // 引入路由（常量路由）
 import { constantRoute } from '@/router/routes'
 
-let useUserSotre = defineStore('User', {
+const useUserSotre = defineStore('User', {
   // 小仓库存储数据
   state: (): UserState => {
     return {
@@ -28,7 +28,7 @@ let useUserSotre = defineStore('User', {
   actions: {
     // 用户登录的方法
     async userLogin(data: loginFormData): Promise<any> {
-      let res: loginResponseData = await reqLogin(data)
+      const res: loginResponseData = await reqLogin(data)
       // 成功：200：token
       if (res.code === 200) {
         this.token = res.data as string
@@ -47,7 +47,7 @@ let useUserSotre = defineStore('User', {
     // 获取用户信息
     async userInfo() {
       // 获取用户信息存储到仓库（用户头像，名字）
-      let res: userInfoReponseData = await reqUserInfo()
+      const res: userInfoReponseData = await reqUserInfo()
       if (res.code === 200) {
         this.username = res.data.name
         this.avatar = res.data.avatar
@@ -60,7 +60,7 @@ let useUserSotre = defineStore('User', {
     // 退出logout
     async userLogout() {
       // 目前没有mock接口
-      let res = await reqLogout()
+      const res = await reqLogout()
       if (res.code == 200) {
         //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
         this.token = ''

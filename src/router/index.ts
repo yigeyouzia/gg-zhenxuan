@@ -1,10 +1,10 @@
-//@ts-ignore
+//@ts-expect-error
 import { createRouter, createWebHashHistory } from 'vue-router'
 // RouteRecordRaw
 import { constantRoute } from './routes'
 
 //创建路由器
-let router = createRouter({
+const router = createRouter({
   // 路由模式
   history: createWebHashHistory(),
   routes: constantRoute,

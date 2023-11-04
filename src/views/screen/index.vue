@@ -2,7 +2,12 @@
   <el-header>
     <div class="navbar">
       <div class="logo">Your Logo</div>
-      <el-menu :modelValue="activeMenu" class="nav-menu" mode="horizontal" @update:modelValue="handleMenuSelect">
+      <el-menu
+        :modelValue="activeMenu"
+        class="nav-menu"
+        mode="horizontal"
+        @update:modelValue="handleMenuSelect"
+      >
         <el-menu-item index="home">Home</el-menu-item>
         <el-submenu index="products">
           <template #title>Products</template>
@@ -17,14 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const activeMenu = ref('home');
+const activeMenu = ref('home')
 
 const handleMenuSelect = (index: any) => {
-  activeMenu.value = index;
+  activeMenu.value = index
   // 处理导航菜单的点击事件，可以在这里跳转到不同的页面或执行其他操作
-};
+}
 </script>
 
 <style scoped>

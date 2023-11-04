@@ -1,8 +1,8 @@
 // 根据当前时间获取上午 中午 下午
 // 用于登录问候
-export const getMsgByTime = (): String => {
-  let msg: String = ''
-  let hours: number = new Date().getHours()
+export const getMsgByTime = (): string => {
+  let msg: string = ''
+  const hours: number = new Date().getHours()
   if (hours < 9) {
     msg = '早上'
   } else if (hours < 12) {
