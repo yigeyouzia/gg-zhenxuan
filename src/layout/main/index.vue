@@ -1,22 +1,14 @@
 <!-- 右侧Main 带过度动画写法 -->
-<template>
-  <!-- 二级路由出口 -->
-  <router-view v-slot="{ Component }">
-    <transition name="fade">
-      <component :is="Component" v-if="flag"></component>
-    </transition>
-  </router-view>
-</template>
-
-<script setup lang="ts">
-import { watch, ref, nextTick } from 'vue'
+<script setup lang='ts'>
+import { nextTick, ref, watch } from 'vue'
 
 // 获取骨架的小仓库
 import useLayOutSettingStore from '@/store/modules/setting'
-let LayOutSettingStore = useLayOutSettingStore()
+
+const LayOutSettingStore = useLayOutSettingStore()
 
 // 控制当前组件是否销毁重建
-let flag = ref(true)
+const flag = ref(true)
 
 // 监听仓库数据是否变化
 watch(
@@ -32,13 +24,23 @@ watch(
   { immediate: true, deep: true },
 )
 </script>
-<script lang="ts">
+
+<script lang='ts'>
 export default {
   name: 'Main',
 }
 </script>
 
-<style style scoped lang="scss">
+<template>
+  <!-- 二级路由出口 -->
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" v-if="flag" />
+    </transition>
+  </router-view>
+</template>
+
+<style style scoped lang='scss'>
 .fade-enter-from {
   /* 透明度 */
   opacity: 0;

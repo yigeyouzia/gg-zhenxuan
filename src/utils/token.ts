@@ -1,12 +1,12 @@
 // 封装本地读取数据和存数据
-export const SET_TOKEN = (token: string) => {
+export function SET_TOKEN(token: string) {
   localStorage.setItem('TOKEN', token)
 }
 
-export const GET_TOKEN = (): string | null => {
+export function GET_TOKEN(): string | null {
   return localStorage.getItem('TOKEN')
 }
 
-export const DEl_TOKEN = (): void => {
+export function DEl_TOKEN(): void {
   localStorage.removeItem('TOKEN')
 }

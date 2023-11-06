@@ -1,29 +1,79 @@
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
+import { rules } from './rules'
+import { getMsgByTime } from '@/utils/time.ts'
+
+// 引入user小仓库
+import useUserStore from '@/store/modules/user'
+
+const userStore = useUserStore()
+// 获取路由器
+const $router = useRouter()
+const $route = useRoute()
+
+// 加载变量
+const loading = ref(false)
+const loginForm = reactive({ username: 'admin', password: 'atguigu123' })
+// 获取form Ref
+const loginFormRef = ref()
+// 登录按钮回调
+async function login() {
+  // console.log($route);
+  // 表单校验字段
+  await loginFormRef.value.validate()
+  // 加载效果
+  loading.value = true
+  try {
+    await userStore.userLogin(loginForm)
+    // 跳转到首页 或者重定向位置
+    const redirect: any | string = $route.query.redirect
+    $router.push({ path: redirect || '/' })
+    ElNotification({
+      type: 'success',
+      message: '欢迎回来',
+      title: `HI,${getMsgByTime()}好`,
+    })
+  }
+  catch (error) {
+    ElNotification({
+      type: 'error',
+      message: (error as Error).message,
+    })
+  }
+  finally {
+    loading.value = false
+  }
+}
+</script>
+
 <template>
   <div class="login-container">
     <el-row>
-      <el-col :span="12" :xs="0"></el-col>
+      <el-col :span="12" :xs="0" />
       <el-col :span="12" :xs="24">
         <el-form
+          ref="loginFormRef"
           class="login-form"
           :model="loginForm"
           :rules="rules"
-          ref="loginFormRef"
         >
           <h1>hello</h1>
           <h2>欢迎来到✨✨✨</h2>
           <el-form-item size="normal" prop="username">
             <el-input
-              prefix-icon="User"
               v-model="loginForm.username"
-            ></el-input>
+              prefix-icon="User"
+            />
           </el-form-item>
           <el-form-item size="normal" prop="password">
             <el-input
+              v-model="loginForm.password"
               type="password"
               prefix-icon="Lock"
-              v-model="loginForm.password"
               show-password
-            ></el-input>
+            />
           </el-form-item>
           <el-form-item size="normal">
             <el-button
@@ -41,54 +91,6 @@
     </el-row>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { ElNotification } from 'element-plus'
-import { getMsgByTime } from '@/utils/time.ts'
-
-// 引入user小仓库
-import useUserStore from '@/store/modules/user'
-import { rules } from './rules'
-
-let userStore = useUserStore()
-// 获取路由器
-let $router = useRouter()
-let $route = useRoute()
-
-// 加载变量
-let loading = ref(false)
-let loginForm = reactive({ username: 'admin', password: 'atguigu123' })
-// 获取form Ref
-let loginFormRef = ref()
-// 登录按钮回调
-const login = async () => {
-  // console.log($route);
-  // 表单校验字段
-  await loginFormRef.value.validate()
-  // 加载效果
-  loading.value = true
-  try {
-    await userStore.userLogin(loginForm)
-    // 跳转到首页 或者重定向位置
-    let redirect: any | string = $route.query.redirect
-    $router.push({ path: redirect || '/' })
-    ElNotification({
-      type: 'success',
-      message: '欢迎回来',
-      title: `HI,${getMsgByTime()}好`,
-    })
-  } catch (error) {
-    ElNotification({
-      type: 'error',
-      message: (error as Error).message,
-    })
-  } finally {
-    loading.value = false
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .login-container {

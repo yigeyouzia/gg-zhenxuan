@@ -6,14 +6,14 @@ const regs = {
   password: /^[a-zA-Z0-9]{6,18}$/,
   Ever: /^[a-zA-Z0-9\~\!\@\#\$\%\^\&\*\_\+\{\}\:\"\|\<\>\?\-\=\;\'\\\,\.\/]{6,15}$/,
 }
-const verify = (rule: any, value: any, reg: RegExp, callback: any) => {
+function verify(rule: any, value: any, reg: RegExp, callback: any) {
   if (value) {
-    if (reg.test(value)) {
+    if (reg.test(value))
       callback()
-    } else {
+    else
       callback(new Error(rule.message))
-    }
-  } else {
+  }
+  else {
     callback()
   }
 }

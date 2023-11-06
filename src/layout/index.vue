@@ -1,11 +1,45 @@
+<script setup lang="ts">
+// 获取路由
+import { useRoute } from 'vue-router'
+
+// logo组件
+import Logo from './logo/index.vue'
+
+// munu组件
+import Menu from './menu/index.vue'
+
+// Main组件二级路由
+import Main from './main/index.vue'
+
+// 获取用户相关小仓库
+import Tabbar from './tabbar/index.vue'
+import useUserSotre from '@/store/modules/user'
+import useLayOutSettingStore from '@/store/modules/setting'
+
+// 引入顶部tab组件
+
+// 获取小仓库
+const userStore = useUserSotre()
+const LayOutSettingStore = useLayOutSettingStore()
+
+// 获取路由对象
+const $route = useRoute()
+</script>
+
+<script lang="ts">
+export default {
+  name: 'Layout',
+}
+</script>
+
 <template>
   <div class="layout_container">
-    <!-- 左侧菜单  动态类名-->
+    <!-- 左侧菜单  动态类名 -->
     <div class="layout_slider">
-      <Logo></Logo>
+      <Logo />
       <!-- 菜单滚动条 -->
       <el-scrollbar height=" 400px" class="scrollbar">
-        <!-- 菜单组件  #001529  collapse-->
+        <!-- 菜单组件  #001529  collapse -->
         <el-menu
           :default-active="$route.path"
           background-color="#001529"
@@ -13,7 +47,7 @@
           active-text-color="#2d78be"
           :collapse="LayOutSettingStore.fold ? true : false"
         >
-          <Menu :menuList="userStore.menuRoutes"></Menu>
+          <Menu :menu-list="userStore.menuRoutes" />
         </el-menu>
       </el-scrollbar>
     </div>
@@ -22,46 +56,17 @@
       class="layout_tabbar"
       :class="{ fold: LayOutSettingStore.fold ? true : false }"
     >
-      <Tabbar></Tabbar>
+      <Tabbar />
     </div>
     <!-- 内容展示区 -->
     <div
       class="layout_main"
       :class="{ fold: LayOutSettingStore.fold ? true : false }"
     >
-      <Main></Main>
+      <Main />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-// 获取路由
-import { useRoute } from 'vue-router'
-// logo组件
-import Logo from './logo/index.vue'
-// munu组件
-import Menu from './menu/index.vue'
-// Main组件二级路由
-import Main from './main/index.vue'
-// 获取用户相关小仓库
-import useUserSotre from '@/store/modules/user'
-import useLayOutSettingStore from '@/store/modules/setting'
-// 引入顶部tab组件
-import Tabbar from './tabbar/index.vue'
-
-// 获取小仓库
-let userStore = useUserSotre()
-let LayOutSettingStore = useLayOutSettingStore()
-
-// 获取路由对象
-let $route = useRoute()
-</script>
-
-<script lang="ts">
-export default {
-  name: 'Layout',
-}
-</script>
 
 <style scoped lang="scss">
 .layout_container {

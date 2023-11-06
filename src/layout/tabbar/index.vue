@@ -1,31 +1,9 @@
-<template>
-  <div class="tabbar">
-    <!-- 顶部左侧静态 -->
-    <div class="tabbar-left">
-      <Breadcrumb></Breadcrumb>
-    </div>
-    <!-- 顶部右侧静态 -->
-    <div class="tabbar-right">
-      <Setting></Setting>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 // 左侧
 import Breadcrumb from './breadcrumb/index.vue'
+
 // 右侧
 import Setting from './setting/index.vue'
-let a = [
-  {
-    lessonname: '大一',
-    childrenLessons: ['1', '2'],
-  },
-  {
-    lessonname: '大二',
-    childrenLessons: ['1', '2'],
-  },
-]
 </script>
 
 <script lang="ts">
@@ -33,6 +11,19 @@ export default {
   name: 'Tabbar',
 }
 </script>
+
+<template>
+  <div class="tabbar">
+    <!-- 顶部左侧静态 -->
+    <div class="tabbar-left">
+      <Breadcrumb />
+    </div>
+    <!-- 顶部右侧静态 -->
+    <div class="tabbar-right">
+      <Setting />
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .tabbar {
