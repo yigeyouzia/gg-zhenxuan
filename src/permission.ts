@@ -1,4 +1,5 @@
 // 路由鉴权:鉴权,项目当中路由能不能被的权限的设置(某一个路由什么条件下可以访问、什么条件下不可以访问)
+// eslint-disable-next-line import/order
 import router from '@/router'
 
 // pnpm i progress 进度条
@@ -58,14 +59,14 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   }
   else {
     // 2.用户未登录
-    if (to.path == '/login')
+    if (to.path === '/login')
       next()
     else
       next({ path: '/login', query: { rederict: to.path } })
   }
 })
 // 全局后置守卫
-router.afterEach((to: any, from: any) => {
+router.afterEach(() => {
   nprogress.done()
 })
 

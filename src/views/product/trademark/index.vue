@@ -31,7 +31,7 @@ const trademarkParams = reactive<TradeMark>({
 // 获取品牌函数
 async function getHasTrademark() {
   const res: TradeMarkResponseData = await reqHasTrademark(pageNo.value, limit.value)
-  if (res.code == 200) {
+  if (res.code === 200) {
     total.value = res.data.total
     trademarkArr.value = res.data.records
   }
@@ -56,14 +56,15 @@ function sizeChange() {
 // 2.对话框
 function addTradeMark() {
   // 打开前清空
+  trademarkParams.id = 0
   trademarkParams.tmName = ''
   trademarkParams.logoUrl = ''
   dialogFormVisible.value = true
 }
 
 function UpdateTradeMark(data: TradeMark) {
-  trademarkParams.logoUrl = data.logoUrl
-  trademarkParams.tmName = data.tmName
+  trademarkParams.id = data.id
+  Object.assign(trademarkParams, data) // 拷贝
   dialogFormVisible.value = true
 }
 
@@ -71,12 +72,15 @@ function UpdateTradeMark(data: TradeMark) {
 async function confirm() {
   const res: any = await reqAddOrUpdateTrademark(trademarkParams)
   if (res.code === 200) {
-    ElMessage.success('添加品牌成功🥰🥰')
+    ElMessage({
+      type: 'success',
+      message: trademarkParams.id ? '修改品牌川成功🥰🥰' : '添加品牌成功🥰🥰',
+    })
     // 再次请求数据
     getHasTrademark()
   }
   else {
-    ElMessage.error('添加品牌成功🥰🥰')
+    ElMessage.error('操作失败😋😋')
   }
   dialogFormVisible.value = false
 }
@@ -123,13 +127,13 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response) => {
         <el-table-column prop="tmName" label="品牌LOGO">
           <template #="{ row }">
             <img
-              :src="row.logoUrl[0] != 'h' ? '/src/assets/images/avatar.jpg' : row.logoUrl" alt=""
+              :src="row.logoUrl[0] !== 'h' ? '/src/assets/images/avatar.jpg' : row.logoUrl" alt=""
               style="width: 100px; height: 100px;"
             >
           </template>
         </el-table-column>
         <el-table-column label="品牌操作">
-          <template #="{ row }">
+          <template #="{row }">
             <el-button type="primary" size="small" icon="Edit" @click="UpdateTradeMark(row)" />
             <el-button type="primary" size="small" icon="Delete" />
           </template>
@@ -144,7 +148,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response) => {
     </el-card>
 
     <!-- 对话框组件 -->
-    <el-dialog v-model="dialogFormVisible" title="bb" width="30%" @close="">
+    <el-dialog v-model="dialogFormVisible" :title="trademarkParams.id ? '修改品牌' : '添加品牌'" width="30%">
       <el-form>
         <el-form-item label="品牌名称" label-width="80px">
           <el-input v-model="trademarkParams.tmName" placeholder="请输入品牌名称" />

@@ -1,4 +1,3 @@
-// @ts-expect-error
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 // RouteRecordRaw
